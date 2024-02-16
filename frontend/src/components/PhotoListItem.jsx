@@ -1,6 +1,7 @@
 import React from "react";
 
 import "../styles/PhotoListItem.scss";
+import PhotoFavButton from "./PhotoFavButton";
 
 const PhotoListItem = ({ data }) => {
 const { id, location, imageSource, username, profile } = data;
@@ -18,6 +19,7 @@ return (
       </div>
     </div>   
   </div>
+  <PhotoFavButton />
 </div>
 
 )
