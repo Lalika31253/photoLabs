@@ -2,6 +2,7 @@ import React from "react";
 
 import "../styles/PhotoList.scss";
 
+
 const sampleDataForPhotoList = [
   {
     id: "1",
@@ -59,7 +60,22 @@ const sampleDataForPhotoList = [
 const PhotoList = () => {
   return (
     <ul className="photo-list">
-      {/* Insert React */}
+        {sampleDataForPhotoList.map(photo => (
+        <div key = { photo.id } className="photo-list__item">
+          <img className="photo-list__image" src={photo.urls.regular} alt="User image" />
+
+          <div className="photo-list__user-details">
+            <img className="photo-list__user-profile" src={photo.user.profile} alt="User profile" />
+            <div className="photo-list__user-info">
+              {photo.user.username}
+              <div className="photo-list__user-location">
+                {photo.location.city},
+                {photo.location.country}
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
     </ul>
   );
 };
