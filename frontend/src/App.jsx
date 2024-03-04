@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.scss';
 import HomeRoute from './components/HomeRoute';
+import mockPhotoData from './mocks/photos';
+import mockTopicData from './mocks/topics';
 
 
 
@@ -12,7 +14,7 @@ const App = () => {
   return (
     <div className="App">
 
-      <HomeRoute/>  
+      <HomeRoute photos={mockPhotoData} topics={mockTopicData}/>  
 
            
     </div>
