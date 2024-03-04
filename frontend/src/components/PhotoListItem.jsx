@@ -21,7 +21,7 @@ const PhotoListItem = ({ photoData }) => {
         <img className="photo-list__user-profile" src={user.profile} alt={user.username} />
         <div className="photo-list__user-info">{user.name}</div>
         <div className="photo-list__user-info photo-list__user-location">
-          {city}
+          {city}, {country}
         </div>
       </div>
     </div>
