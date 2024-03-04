@@ -3,21 +3,29 @@ import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
 
 import '../styles/HomeRoute.scss';
-import { queryAllByPlaceholderText } from "@testing-library/react";
 
 function HomeRoute ( { photos, topics } ) {
 
   const [favourite, setFavourite] = useState([]);
 
 
+  // const handleClick = (id) => {
+  //   setFavourite((presentFavourites) => {
+  //     if(presentFavourites.includes(id)) {
+  //       return presentFavourites.filter(favouriteId => favouriteId !== id);
+  //     } else {
+  //       return [...presentFavourites, id]
+  //     }
+  //   });
+  // }
+
   const handleClick = (id) => {
-    setFavourite((presentFavourites) => {
-      if(presentFavourites.includes(id)) {
-        return presentFavourites.filter(favouriteId => favouriteId !== id);
-      } else {
-        return [...presentFavourites, id]
-      }
-    });
+    if (favourite.includes(id)) {
+      const newFAvourite = favourite.filter(favouriteId => favouriteId !== id);
+      setFavourite(newFAvourite);
+    } else {
+      setFavourite(prevFavourite => [...prevFavourite, id]);
+    }
   }
   
   return (
