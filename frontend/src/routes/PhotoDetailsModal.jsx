@@ -13,7 +13,7 @@ const PhotoDetailsModal = ({ updateDisplayModal, displayModal }) => {
     location: { city, country },
     urls: { full, regular },
     user,
-    
+    similar_photos    
   } = displayModal;
 
   return (
@@ -33,12 +33,12 @@ const PhotoDetailsModal = ({ updateDisplayModal, displayModal }) => {
         </div>
       </div>
 
-      {/* <div className="photo-details-modal__similar-photos">
+      <div className="photo-details-modal__similar-photos">
         <h3>Similar Photos</h3>
         <div className="photo-details-modal__similar-photos-list">
-        <PhotoList className="photo-details-modal__images" />
+        <PhotoList className="photo-details-modal__images" photos={similar_photos}/>
       </div>
-    </div> */}
+    </div>
 
     </div>
   )
