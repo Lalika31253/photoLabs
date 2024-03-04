@@ -12,7 +12,12 @@ const PhotoList = ( { photos, isFavourite, handleClick, updateDisplayModal }) =>
   
     <ul className="photo-list">
       {photos.map((photoData) => (
-        <PhotoListItem photoData={photoData} key={photoData.id} isFavourite={isFavourite} handleClick={handleClick} updateDisplayModal={updateDisplayModal}/>
+        <PhotoListItem 
+        photoData={photoData} 
+        key={photoData.id} 
+        isFavourite={isFavourite} 
+        handleClick={handleClick} 
+        updateDisplayModal={updateDisplayModal}/>
       ))}
     </ul>
   );
