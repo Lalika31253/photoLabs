@@ -10,13 +10,13 @@ function PhotoFavButton() {
   const handleClick = () => {
     // console.log("Clicked");
     setFavourite(prevFavourite => !prevFavourite);
-  };
+  }
 
 
   return (
     <div className={`photo-list__fav-icon ${favourite ? 'photo-list__fav-icon-svg' : ''}`} onClick={handleClick}>
       <div className="photo-list__fav-icon-svg">
-        <FavIcon favourite={favourite}/>
+        <FavIcon favourite={FavIcon}/>
       </div>
     </div>
   );
