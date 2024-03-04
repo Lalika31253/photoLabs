@@ -5,15 +5,15 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from '../components/PhotoList';
 
 
-const PhotoDetailsModal = ({ updateDisplayModal, displayModal }) => {
-  console.log("Modal data", displayModal);
+const PhotoDetailsModal = ({ updateDisplayModal, displayModal, favourite, handleFavourite }) => {
+  // console.log("Modal data", displayModal);
 
   const {
     id,
     location: { city, country },
     urls: { full, regular },
     user,
-    similar_photos    
+    similar_photos
   } = displayModal;
 
   return (
@@ -23,6 +23,7 @@ const PhotoDetailsModal = ({ updateDisplayModal, displayModal }) => {
       </button>
 
       <div className="photo-details-modal__images">
+        
         <img className="photo-details-modal__image" src={full} alt="Photo" />
 
         <div className='photo-details-modal__photographer-details'>
@@ -36,9 +37,14 @@ const PhotoDetailsModal = ({ updateDisplayModal, displayModal }) => {
       <div className="photo-details-modal__similar-photos">
         <h3>Similar Photos</h3>
         <div className="photo-details-modal__similar-photos-list">
-        <PhotoList className="photo-details-modal__images" photos={similar_photos}/>
+          <PhotoList
+            // photos={similar_photos}
+            displayModal={displayModal}
+            favourite={favourite}
+            handleFavourite={handleFavourite}
+            updateDisplayModal={updateDisplayModal} />
+        </div>
       </div>
-    </div>
 
     </div>
   )

@@ -3,33 +3,62 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 
-const PhotoListItem = ({ photoData, handleClick, isFavourite, updateDisplayModal }) => {
+const PhotoListItem = ({ photo, handleFavourite, favourite, updateDisplayModal, displayModal }) => {
 
   const {
-    id, 
-    location: {city, country},
-    urls: {full, regular},
+    id,
+    location: { city, country },
+    urls: { full, regular },
     user
-  } = photoData;
+  } = photo;
 
-  const handleModal = () => {
-    updateDisplayModal(photoData);
+  const handleClick = () => {
+    updateDisplayModal(photo);
   };
 
   return (
     <div className="photo-list__item">
-        <PhotoFavButton isFavourite={isFavourite} handleClick={handleClick} id={id}/>
-      <img className="photo-list__image" src={full} alt={user.name} onClick={handleModal} />
-      <div className="photo-list__user-details">
-        <img className="photo-list__user-profile" src={user.profile} alt={user.username} />
-        <div className="photo-list__user-info">{user.name}</div>
-        <div className="photo-list__user-info photo-list__user-location">
-          {city}, {country}
-        </div>
-      </div>
+      <PhotoFavButton favourite={favourite} handleFavourite={handleFavourite} id={id} />
+      {photo.modalState ? (
+        <>
+          <img onClick={() => updateDisplayModal(photo)} className="photo-details-modal__image" src={full} alt="Image" />
+          <div className='photo-details-modal__photographer-details'>
+            <img className="photo-details-modal__photographer-profile" src={profile} alt="Profile Image" />
+            <div className="photo-details-modal__photographer-info">
+              {user.name}
+              <span className="photo-details-modal__photographer-location">{city}, {country}</span>
+            </div>
+          </div>
+        </>
+      ) : (
+        <img onClick={handleClick} className="photo-list__image" src={full} alt="Image" />
+      )}
     </div>
   );
 };
+
+// return (
+//   <div className="photo-list__item">
+//     <img
+//       onClick={modalState ? () => updateDisplayModal(photoData) : handleClick}
+//       className="photo-list__image"
+//       src={full}
+//       alt="Image"
+//     />
+//     {modalState && (
+//       <div>
+//         <div className='photo-details-modal__photographer-details'>
+//           <img className="photo-details-modal__photographer-profile" src={user.profile} alt="Profile Image" />
+//           <div className="photo-details-modal__photographer-info">
+//             {user.name}
+//             <span className="photo-details-modal__photographer-location">{city}, {country}</span>
+//           </div>
+//         </div>
+//       </div>
+//     )}
+//   </div>
+// );
+// };
 
 
 export default PhotoListItem;

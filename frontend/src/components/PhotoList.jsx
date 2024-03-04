@@ -1,26 +1,40 @@
 import React from 'react';
 import '../styles/PhotoList.scss'
 import PhotoListItem from './PhotoListItem';
-// import photos from '../mocks/photos';
 
-
-
-const PhotoList = ( { photos, isFavourite, handleClick, updateDisplayModal }) => {
-
+const PhotoList = ({ photos, favourite, handleFavourite, updateDisplayModal, displayModal }) => {
 
   return (
-  
+
     <ul className="photo-list">
-      {photos.map((photoData) => (
-        <PhotoListItem 
-        photoData={photoData} 
-        key={photoData.id} 
-        isFavourite={isFavourite} 
-        handleClick={handleClick} 
-        updateDisplayModal={updateDisplayModal}/>
-      ))}
+        {displayModal ? (<PhotoListItem
+        photo={displayModal}
+        favourite={favourite}
+        handleFavourite={handleFavourite} />) : (photos.map((photo) => {
+          return <PhotoListItem
+            photoData={photo}
+            key={photo.id}
+            favourite={favourite}
+            handleFavourite={handleFavourite}
+            updateDisplayModal={updateDisplayModal} />
+        }))}
     </ul>
   );
 };
+
+// return (
+//   <ul className="photo-list">
+//     {photos.map((photoData) => (
+//       <PhotoListItem
+//         key={photoData.id}
+//         photoData={photoData}
+//         favourite={favourite}
+//         handleFavourite={handleFavourite}
+//         updateDisplayModal={updateDisplayModal}
+//       />
+//     ))}
+//   </ul>
+// );
+// };
 
 export default PhotoList;
