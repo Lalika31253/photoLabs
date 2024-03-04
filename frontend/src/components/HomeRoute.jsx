@@ -2,9 +2,10 @@ import React, {useState} from "react";
 import TopNavigation from 'components/TopNavigationBar';
 import PhotoList from 'components/PhotoList';
 
+
 import '../styles/HomeRoute.scss';
 
-function HomeRoute ( { photos, topics } ) {
+function HomeRoute ( { photos, topics, updateDisplayModal } ) {
 
   const [favourite, setFavourite] = useState([]);
 
@@ -32,7 +33,7 @@ function HomeRoute ( { photos, topics } ) {
     <div className="home-route">
       
         <TopNavigation topics={topics} isFavourite={favourite}/>
-        <PhotoList photos={photos} handleClick={handleClick} isFavourite={favourite}/>
+        <PhotoList photos={photos} handleClick={handleClick} isFavourite={favourite} updateDisplayModal={updateDisplayModal}/>
       
     </div>
   );

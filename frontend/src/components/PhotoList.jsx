@@ -5,14 +5,14 @@ import PhotoListItem from './PhotoListItem';
 
 
 
-const PhotoList = ( { photos, isFavourite, handleClick }) => {
+const PhotoList = ( { photos, isFavourite, handleClick, updateDisplayModal }) => {
 
 
   return (
   
     <ul className="photo-list">
       {photos.map((photoData) => (
-        <PhotoListItem photoData={photoData} key={photoData.id} isFavourite={isFavourite} handleClick={handleClick}/>
+        <PhotoListItem photoData={photoData} key={photoData.id} isFavourite={isFavourite} handleClick={handleClick} updateDisplayModal={updateDisplayModal}/>
       ))}
     </ul>
   );
