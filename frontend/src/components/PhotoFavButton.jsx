@@ -7,8 +7,8 @@ function PhotoFavButton({ handleFavourite, id, favourite }) {
 
   return (
     <div onClick={() => handleFavourite(id)} className="photo-list__fav-icon">
-      {Array.isArray(favourite) && favourite.includes(id) ?
-        (<div className="photo-list__fav-icon-svg">
+      {Array.isArray(favourite) && favourite.includes(id) ? (
+      <div className="photo-list__fav-icon-svg">
           <FavIcon selected={true} />
         </div>
         ) : (

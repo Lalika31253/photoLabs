@@ -3,6 +3,8 @@ import React from 'react';
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from '../components/PhotoList';
+import PhotoFavButton from '../components/PhotoFavButton';
+import PhotoListItem from '../components/PhotoListItem';
 
 
 const PhotoDetailsModal = ({ updateDisplayModal, displayModal, favourite, handleFavourite }) => {
@@ -16,6 +18,8 @@ const PhotoDetailsModal = ({ updateDisplayModal, displayModal, favourite, handle
     similar_photos
   } = displayModal;
 
+  const similarPhotos = Object.values(displayModal.similar_photos);
+
   return (
     <div className="photo-details-modal">
       <button className="photo-details-modal__close-button" onClick={updateDisplayModal}>
@@ -23,7 +27,7 @@ const PhotoDetailsModal = ({ updateDisplayModal, displayModal, favourite, handle
       </button>
 
       <div className="photo-details-modal__images">
-        
+
         <img className="photo-details-modal__image" src={full} alt="Photo" />
 
         <div className='photo-details-modal__photographer-details'>
@@ -38,13 +42,19 @@ const PhotoDetailsModal = ({ updateDisplayModal, displayModal, favourite, handle
         <h3>Similar Photos</h3>
         <div className="photo-details-modal__similar-photos-list">
           <PhotoList
-            // photos={similar_photos}
+            similarPhotos={similarPhotos}
             displayModal={displayModal}
             favourite={favourite}
             handleFavourite={handleFavourite}
             updateDisplayModal={updateDisplayModal} />
+
+          <PhotoListItem photo={displayModal}
+            handleFavourite={handleFavourite}
+            favourite={favourite} />
         </div>
       </div>
+
+
 
     </div>
   )
