@@ -28,5 +28,4 @@ const PhotoList = ({ photos, favourite, handleFavourite, updateDisplayModal, sim
   );
 };
 
-
 export default PhotoList;

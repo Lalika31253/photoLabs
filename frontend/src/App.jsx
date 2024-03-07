@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.scss';
-import HomeRoute from './components/HomeRoute';
+import HomeRoute from 'routes/HomeRoute';
 import mockPhotoData from './mocks/photos';
 import mockTopicData from './mocks/topics';
 import PhotoDetailsModal from './routes/PhotoDetailsModal';

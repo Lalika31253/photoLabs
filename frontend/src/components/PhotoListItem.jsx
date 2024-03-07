@@ -20,8 +20,8 @@ const PhotoListItem = ({ photo, handleFavourite, favourite, updateDisplayModal, 
         <img className="photo-details-modal__photographer-profile" src={user.profile} alt="Profile Image" />
         <div className="photo-details-modal__photographer-info">
           {user.name}
-          <span className="photo-details-modal__photographer-location">{city}, {country}</span>
-        </div>
+          <div className="photo-details-modal__photographer-location">{city}, {country}</div>
+      </div>
       </div>
     </div>
   );
