@@ -1,6 +1,5 @@
 import { type } from "@testing-library/user-event/dist/type";
 import { hasUnreliableEmptyValue } from "@testing-library/user-event/dist/utils";
-import photos from "mocks/photos";
 import React, { useEffect, useReducer } from "react";
 
 export const ACTIONS = {
@@ -8,6 +7,7 @@ export const ACTIONS = {
   FAV_PHOTO_REMOVED: 'FAV_PHOTO_REMOVED',
   SET_PHOTO_DATA: 'SET_PHOTO_DATA',
   SET_TOPIC_DATA: 'SET_TOPIC_DATA',
+  GET_PHOTOS_BY_TOPICS: 'GET_PHOTOS_BY_TOPICS',
   DISPLAY_PHOTO_DETAILS: 'DISPLAY_PHOTO_DETAILS'
 };
 
@@ -46,11 +46,19 @@ const reducer = (state, action) => {
       };
 
 
-      case ACTIONS.SET_TOPIC_DATA:
-        return {
-          ...state,
-          topicData: action.payload
-        };
+    case ACTIONS.SET_TOPIC_DATA:
+      return {
+        ...state,
+        topicData: action.payload
+      };
+
+    case ACTIONS.GET_PHOTOS_BY_TOPICS:
+      return {
+        ...state,
+        photoByTopic: action.payload
+      };
+
+
     default:
       return state;
   };
@@ -91,7 +99,23 @@ const useApplicationData = () => {
       .catch((error) => {
         console.log("Error fetching topics:", error);
       });
+
   }, []);
+
+
+  const fetchPhotoByTopic = (topicId) => {
+    if (topicId) {
+      fetch(`/api/topics/photos/${topicId}`)
+        .then(res => res.json())
+        .then(data => {
+          dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: data });
+        })
+        .catch(error => {
+          console.log("Error fetching photo for the specific topic:", error);
+        });
+    }
+  }
+
 
 
   const handleFavourite = (id) => {
@@ -112,12 +136,15 @@ const useApplicationData = () => {
 
 
   return (
-    { favourite: state.favourite, 
-      displayModal: state.displayModal, 
-      handleFavourite, 
-      updateDisplayModal, 
-      photoData: state.photoData, 
-      topicData: state.topicData }
+    {
+      favourite: state.favourite,
+      displayModal: state.displayModal,
+      handleFavourite,
+      updateDisplayModal,
+      photoData: state.photoData,
+      topicData: state.topicData,
+      fetchPhotoByTopic
+    }
   )
 
 
