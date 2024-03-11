@@ -8,7 +8,6 @@ import PhotoListItem from '../components/PhotoListItem';
 
 
 const PhotoDetailsModal = ({ updateDisplayModal, displayModal, favourite, handleFavourite }) => {
-  // console.log("Modal data", displayModal);
 
   const {
     id,
