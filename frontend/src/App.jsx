@@ -20,16 +20,16 @@ const App = () => {
   return (
     <div className="App">
 
-      <HomeRoute 
-        photos={photoData} 
-        topics={topicData} 
-        updateDisplayModal={updateDisplayModal} 
+      <HomeRoute
+        photos={photoData}
+        topics={topicData}
+        updateDisplayModal={updateDisplayModal}
         favourite={favourite}
         handleFavourite={handleFavourite} />
 
-      {displayModal && <PhotoDetailsModal 
-        updateDisplayModal={updateDisplayModal} 
-        displayModal={displayModal} 
+      {displayModal && <PhotoDetailsModal
+        updateDisplayModal={updateDisplayModal}
+        displayModal={displayModal}
         favourite={favourite}
         handleFavourite={handleFavourite} />}
 

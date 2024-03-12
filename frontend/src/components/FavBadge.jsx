@@ -9,7 +9,7 @@ const FavBadge = ({ favourite }) => {
     <div className='fav-badge'>
       {isFavourite ? (<FavIcon displayAlert={isFavourite} selected={true} />) : (<FavIcon />)}
     </div>
-  ) 
+  )
 };
 
 export default FavBadge;

@@ -1,15 +1,18 @@
 .photo-details-modal {
-  // background-color: white;
   background-color: #F5F5F5;
   box-shadow: 0 0 0 50vmax rgba(0,0,0,.5);
   position: absolute;
-  top: 55%;
+  top: 49%;
   left: 50%;
   transform: translate(-50%, -40%);
-  height: 80%;
+  height: 90%;
   width: 55%;
   overflow-y: scroll;
   border-radius: 12px;
+
+  background-image: url('https://img.freepik.com/free-photo/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-102267.jpg?w=1380&t=st=1710215887~exp=1710216487~hmac=c3186dd66b437bf2bee376ffe343495ffba78b0be65640165328f93827c25090');
+  background-size: cover;
+  background-position: center;
 }
 
 .photo-details-modal__close-button {
@@ -27,9 +30,6 @@
 }
 
 .photo-details-modal__images {
-  // margin-left: 36px;
-  // margin-top: 8px;
-
   margin: 10px 30px 24px 38px;
   padding: 8px;
   border-width: 0.5px;
@@ -78,6 +78,7 @@
 .photo-details-modal__photographer-location {
   color: #838383;
 }
+
 .photo-details-modal__photographer-profile {
   object-fit: cover;
   border-radius: 100%;
