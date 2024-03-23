@@ -1,5 +1,4 @@
 import React from 'react';
-
 import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from '../components/PhotoList';
@@ -12,9 +11,8 @@ const PhotoDetailsModal = ({ updateDisplayModal, displayModal, favourite, handle
   const {
     id,
     location: { city, country },
-    urls: { full, regular },
-    user,
-    similar_photos
+    urls: { full },
+    user
   } = displayModal;
 
   const similarPhotos = Object.values(displayModal.similar_photos);
@@ -55,11 +53,8 @@ const PhotoDetailsModal = ({ updateDisplayModal, displayModal, favourite, handle
             favourite={favourite} />
         </div>
       </div>
-
-
-
     </div>
-  )
+  );
 };
 
 export default PhotoDetailsModal;

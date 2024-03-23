@@ -3,14 +3,14 @@ import "../styles/PhotoListItem.scss";
 import PhotoFavButton from "./PhotoFavButton";
 
 
-const PhotoListItem = ({ photo, handleFavourite, favourite, updateDisplayModal, similarPhotos }) => {
+const PhotoListItem = ({ photo, handleFavourite, favourite, updateDisplayModal }) => {
 
   const { id, location: { city, country }, urls: { full }, user } = photo;
 
+  //function to handle display modal
   const handleClick = () => {
     updateDisplayModal(photo);
   };
-
 
   return (
     <div className="photo-list__item">
@@ -28,7 +28,6 @@ const PhotoListItem = ({ photo, handleFavourite, favourite, updateDisplayModal, 
     </div>
   );
 };
-
 
 export default PhotoListItem;
 
