@@ -2,30 +2,41 @@ import React from 'react';
 import './App.scss';
 import HomeRoute from './routes/HomeRoute';
 import PhotoDetailsModal from './routes/PhotoDetailsModal';
-import useApplicationData from './hooks/useApplicationData';
+import { useApplicationData } from './hooks/useApplicationData';
+import TopNavigation from './components/TopNavigationBar';
 
 
 const App = () => {
 
+  //import custom hook from useApplicationData
   const {
     favourite,
     handleFavourite,
     updateDisplayModal,
     displayModal,
     photoData,
-    topicData
+    topicData,
+    fetchPhotoByTopic
   } = useApplicationData();
 
 
   return (
     <div className="App">
 
+      
+      <TopNavigation
+        topics={topicData}
+        favourite={favourite}
+        fetchPhotoByTopic={fetchPhotoByTopic}
+         />
+
       <HomeRoute
         photos={photoData}
         topics={topicData}
         updateDisplayModal={updateDisplayModal}
         favourite={favourite}
-        handleFavourite={handleFavourite} />
+        handleFavourite={handleFavourite}
+        fetchPhotoByTopic={fetchPhotoByTopic} />
 
       {displayModal && <PhotoDetailsModal
         updateDisplayModal={updateDisplayModal}

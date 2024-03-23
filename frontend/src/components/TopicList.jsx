@@ -7,8 +7,8 @@ import TopicListItem from "./TopicListItem";
 const TopicList = ({ topics, fetchPhotoByTopic }) => {
   return (
     <div className="top-nav-bar__topic-list">
-      {topics.map((topicData) => (
-        <TopicListItem topicData={topicData} key={topicData.id} fetchPhotoByTopic={fetchPhotoByTopic} />
+      {topics.map((topic) => (
+        <TopicListItem key={topic.id} topic={topic} fetchPhotoByTopic={fetchPhotoByTopic} />
       ))}
     </div>
   );

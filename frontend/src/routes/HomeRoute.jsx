@@ -6,12 +6,11 @@ import PhotoList from '../components/PhotoList';
 
 import '../styles/HomeRoute.scss';
 
-function HomeRoute({ photos, topics, updateDisplayModal, favourite, handleFavourite, fetchPhotoByTopic }) {
+function HomeRoute({ photos, updateDisplayModal, favourite, handleFavourite }) {
 
   return (
     <div className="home-route">
 
-      <TopNavigation topics={topics} favourite={favourite} fetchPhotoByTopic={fetchPhotoByTopic} />
       <PhotoList photos={photos}
         handleFavourite={handleFavourite}
         favourite={favourite}

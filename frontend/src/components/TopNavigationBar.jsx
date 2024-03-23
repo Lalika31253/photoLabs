@@ -7,7 +7,7 @@ import FavBadge from './FavBadge';
 const TopNavigation = ({ topics, favourite, fetchPhotoByTopic }) => {
   return (
     <div className="top-nav-bar">
-      <span className="top-nav-bar__logo">PhotoLabs</span>
+      <a href="http://localhost:3000/" className="top-nav-bar__logo">PhotoLabs</a>
       <div><TopicList topics={topics} fetchPhotoByTopic={fetchPhotoByTopic} /></div>
       <div><FavBadge favourite={favourite} /></div>
     </div>
