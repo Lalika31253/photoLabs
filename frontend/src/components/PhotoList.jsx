@@ -7,7 +7,7 @@ const PhotoList = ({ photos, favourite, handleFavourite, updateDisplayModal, sim
   return (
 
     <ul className="photo-list">
-
+      {/* map similar photo for display modal */}
       {similarPhotos ? (similarPhotos.map(photos => {
         return <PhotoListItem
           key={photos.id}
@@ -15,7 +15,7 @@ const PhotoList = ({ photos, favourite, handleFavourite, updateDisplayModal, sim
           handleFavourite={handleFavourite}
           favourite={favourite}
           updateDisplayModal={updateDisplayModal} />
-      })) : (photos.map(photo => {
+      })) : (photos.map(photo => { //map photo for home route
         return <PhotoListItem
           key={photo.id}
           photo={photo}

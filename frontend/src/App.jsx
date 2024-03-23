@@ -23,7 +23,6 @@ const App = () => {
   return (
     <div className="App">
 
-      
       <TopNavigation
         topics={topicData}
         favourite={favourite}
@@ -38,6 +37,7 @@ const App = () => {
         handleFavourite={handleFavourite}
         fetchPhotoByTopic={fetchPhotoByTopic} />
 
+      {/* show display modal when a picture was clicked */}
       {displayModal && <PhotoDetailsModal
         updateDisplayModal={updateDisplayModal}
         displayModal={displayModal}

@@ -1,8 +1,5 @@
-
 import React from "react";
 import PhotoList from '../components/PhotoList';
-
-
 import '../styles/HomeRoute.scss';
 
 function HomeRoute({ photos, updateDisplayModal, favourite, handleFavourite }) {
@@ -17,8 +14,7 @@ function HomeRoute({ photos, updateDisplayModal, favourite, handleFavourite }) {
 
     </div>
   );
-
-}
+};
 
 export default HomeRoute;
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import axios from "axios";
 
 export const ACTIONS = {
@@ -72,42 +72,36 @@ export const useApplicationData = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
-
   useEffect(() => {
-    //get photos from api
-    async function getPhotos() {
-      try {
-        const response = await fetch("/api/photos");
-        if (!response.ok) {
-          throw new Error('Failed to fetch photoes');
-        }
-        const data = await response.json();
-        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
-      } catch (error) {
-        console.log('Error fething photoData is:', error);
+    // fetch photos from api
+    async function fetchPhotos() {
+      const response = await fetch("/api/photos");
+      if (!response.ok) {
+        throw new Error('Failed to fetch photos');
       }
+      return response.json();
     }
 
-    //get topics from api
-    async function getTopics() {
-      try {
-        const response = await fetch('/api/topics');
-        if (!response.ok) {
-          throw new Error('Failed to fetch topics');
-        }
-        const data = await response.json();
-        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data });
-      } catch (error) {
-        console.log('Error fething topicData is:', error);
+    //fetch topics from api
+    async function fetchTopics() {
+      const response = await fetch('/api/topics');
+      if (!response.ok) {
+        throw new Error('Failed to fetch topics');
       }
+      return response.json();
     }
 
-    getPhotos();
-    getTopics();
-
+    // use Promise.all to all data
+    Promise.all([fetchPhotos(), fetchTopics()])
+      .then(([photos, topics]) => {
+        dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: photos });
+        dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: topics });
+      })
+      .catch(error => {
+        console.log('Error fetching data:', error);
+      });
 
   }, []);
-
 
   //get photos when clicking on topic button
   async function fetchPhotoByTopic(id) {
@@ -120,7 +114,6 @@ export const useApplicationData = () => {
     }
   };
 
-
   //function to handle adding/removing favourite
   const handleFavourite = (id) => {
     const actionType = state.favourite.includes(id);
@@ -131,12 +124,11 @@ export const useApplicationData = () => {
     }
   };
 
-
+  //function to ubdate display modal
   const updateDisplayModal = (props) => {
     const modalState = state.displayModal ? false : props;
     dispatch({ type: ACTIONS.DISPLAY_PHOTO_DETAILS, payload: modalState });
   };
-
 
 
   return (
@@ -150,7 +142,6 @@ export const useApplicationData = () => {
       fetchPhotoByTopic
     }
   )
-
 };
 
 
