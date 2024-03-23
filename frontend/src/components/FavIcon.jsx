@@ -1,5 +1,4 @@
 import React from 'react';
-import FavBadge from './FavBadge';
 
 const FavIcon = ({ displayAlert, selected }) => {
   return (

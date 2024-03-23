@@ -1,8 +1,6 @@
 import React from 'react';
-
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
-import useApplicationData from '../hooks/useApplicationData';
 
 function PhotoFavButton({ handleFavourite, id, favourite }) {
 
