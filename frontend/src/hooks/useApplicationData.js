@@ -1,6 +1,5 @@
-import { type } from "@testing-library/user-event/dist/type";
-import { hasUnreliableEmptyValue } from "@testing-library/user-event/dist/utils";
 import React, { useEffect, useReducer } from "react";
+import axios from "axios";
 
 export const ACTIONS = {
   FAV_PHOTO_ADDED: 'FAV_PHOTO_ADDED',
@@ -17,6 +16,7 @@ const initialState = {
   photoData: [],
   topicData: []
 };
+
 
 const reducer = (state, action) => {
 
@@ -40,24 +40,26 @@ const reducer = (state, action) => {
       };
 
     case ACTIONS.SET_PHOTO_DATA:
-      return {
-        ...state,
-        photoData: action.payload
-      };
-
+      try {
+        return { ...state, photoData: action.payload };
+      } catch (error) {
+        console.error('Error updating photoData:', error);
+        return state;
+      }
 
     case ACTIONS.SET_TOPIC_DATA:
-      return {
-        ...state,
-        topicData: action.payload
-      };
+      try {
+        return { ...state, topicData: action.payload };
+      } catch (error) {
+        console.error('Error updating topicData:', error);
+        return state;
+      }
 
     case ACTIONS.GET_PHOTOS_BY_TOPICS:
       return {
         ...state,
-        photoByTopic: action.payload
+        photoData: action.payload
       };
-
 
     default:
       return state;
@@ -66,58 +68,60 @@ const reducer = (state, action) => {
 }
 
 
-const useApplicationData = () => {
+export const useApplicationData = () => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+
   useEffect(() => {
-    fetch('/api/photos')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Couldn't fetch photos");
+    //get photos from api
+    async function getPhotos() {
+      try {
+        const response = await fetch("/api/photos");
+        if (!response.ok) {
+          throw new Error('Failed to fetch photoes');
         }
-        return res.json();
-      })
-      .then((data) => {
+        const data = await response.json();
         dispatch({ type: ACTIONS.SET_PHOTO_DATA, payload: data });
-      })
-      .catch((error) => {
-        console.log("Error fetching photos:", error);
-      });
+      } catch (error) {
+        console.log('Error fething photoData is:', error);
+      }
+    }
 
-
-    fetch('/api/topics')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Couldn't fetch topics");
+    //get topics from api
+    async function getTopics() {
+      try {
+        const response = await fetch('/api/topics');
+        if (!response.ok) {
+          throw new Error('Failed to fetch topics');
         }
-        return res.json();
-      })
-      .then((data) => {
+        const data = await response.json();
         dispatch({ type: ACTIONS.SET_TOPIC_DATA, payload: data });
-      })
-      .catch((error) => {
-        console.log("Error fetching topics:", error);
-      });
+      } catch (error) {
+        console.log('Error fething topicData is:', error);
+      }
+    }
+
+    getPhotos();
+    getTopics();
+
 
   }, []);
 
 
-  const fetchPhotoByTopic = (topicId) => {
-    if (topicId) {
-      fetch(`/api/topics/photos/${topicId}`)
-        .then(res => res.json())
-        .then(data => {
-          dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: data });
-        })
-        .catch(error => {
-          console.log("Error fetching photo for the specific topic:", error);
-        });
+  //get photos when clicking on topic button
+  async function fetchPhotoByTopic(id) {
+    try {
+      const response = await axios.get(`/api/topics/photos/${id}`);
+      dispatch({ type: ACTIONS.GET_PHOTOS_BY_TOPICS, payload: response.data });
     }
-  }
+    catch (error) {
+      console.error(error);
+    }
+  };
 
 
-
+  //function to handle adding/removing favourite
   const handleFavourite = (id) => {
     const actionType = state.favourite.includes(id);
     if (actionType) {
@@ -147,7 +151,8 @@ const useApplicationData = () => {
     }
   )
 
-
 };
 
-export default useApplicationData;
+
+
+
